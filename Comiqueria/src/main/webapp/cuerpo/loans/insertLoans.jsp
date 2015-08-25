@@ -1,3 +1,4 @@
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -25,7 +26,7 @@
 </nav>
 <div class="cuerpo" >
 <div class="galeria">
-  <form class="" action="insertar" method="post">
+  <form class="" action="/Comiqueria/insertar_Prestamos" method="post">
     <div class="contenedor-form">
       <div class="ftit renglones">
         <label class="form-tit">Alta Prestamo</label>
@@ -37,7 +38,9 @@
         <div class="">
           <select id="personaselect" name="personaselect" >
       			<c:forEach var="personas" items="${pListado}">
-      			<option id="<c:out value="${personas.getIdPerson()}"></c:out>" value="<c:out value="${personas.getIdPerson()}">
+      			<option
+      	
+      			 id="<c:out value="${personas.getIdPerson()}"></c:out>" value="<c:out value="${personas.getIdPerson()}">
              	</c:out>">
              	<c:out value="${personas.getNamePerson()}"></c:out>
              	</option>
@@ -52,11 +55,23 @@
           </div>
           <div class="">
              <select  id="comicselect" name="comicselect">
+             
              	<c:forEach var="comiques" items="${cListado}">
-             	<option id="<c:out value="${comiques.getIdComic()}"></c:out>" value="<c:out value="${comiques.getIdComic()}">
+             	<c:choose> 
+             	<c:when test="${(Id ne null) and comiques.getIdComic() eq Id}"> 
+				<option  id="<c:out value="${comiques.getIdComic()}"></c:out>" selected value="<c:out value="${comiques.getIdComic()}">
              	</c:out>">
              	<c:out value="${comiques.getNameComic()}"></c:out>
              	</option>
+				</c:when>
+             	<c:otherwise>
+             	<option  id="<c:out value="${comiques.getIdComic()}"></c:out>" value="<c:out value="${comiques.getIdComic()}">
+             	</c:out>">
+             	<c:out value="${comiques.getNameComic()}"></c:out>
+             	</option>
+             	</c:otherwise>
+             	</c:choose>
+             	
 				</c:forEach>
              </select>
           </div>
@@ -67,7 +82,7 @@
             <label class="label-form">Hasta </label>
         </div>
         <div class="">
-            <input type="date" class="form-cont"> 
+            <input type="date" id="hasta" name="hasta" class="form-cont"> 
         </div>
 
       </div>

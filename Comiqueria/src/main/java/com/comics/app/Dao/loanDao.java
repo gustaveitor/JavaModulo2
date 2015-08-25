@@ -13,10 +13,10 @@ import com.comics.app.Model.Person;
 public class loanDao implements genericDao<Loan> {
 
 	private final String SQL_INSERT = "INSERT INTO loans (Persons_idPerson, Comics_idComic, date) VALUES (?, ?, ?)";
-	private final String SQL_GET_ALL = "select idLoan, c.nameComic, p.namePerson, l.date from  loans l join comics c on l.Comics_idComic = c.idComic join persons p on l.Persons_idPerson = p.idPerson ";
+	private final String SQL_GET_ALL = "SELECT idLoan,c.nameComic,date, Persons_idPerson,c.companyComic,c.reviewComic,c.quantityComic,Comics_idComic ,p.namePerson,p.telephonePerson FROM comics.loans inner join comics.comics as c on c.idComic=loans.Comics_idComic inner join comics.persons as p on p.idPerson = loans.Persons_idPerson";
 	private final String SQL_DELETE = "DELETE FROM loans WHERE idLoan = ?";
-	private final String SQL_GET = "SELECT * FROM loans WHERE ( idLoan = ?)";
-	
+	private final String SQL_GET = "SELECT idLoan,c.nameComic,date, Persons_idPerson,c.companyComic,c.reviewComic,c.quantityComic,Comics_idComic ,p.namePerson,p.telephonePerson FROM comics.loans inner join comics.comics as c on c.idComic=loans.Comics_idComic inner join comics.persons as p on p.idPerson = loans.Persons_idPerson WHERE ( idLoan = ?)";
+	private final String SQL_UPDATE = "UPDATE loans SET Persons_idPerson=?, Comics_idComic=?,date=?  where idLoan=?";
 	private final connectionDB conn = connectionDB.getConnection();
 	
 	public boolean add(Loan c) {
@@ -41,7 +41,24 @@ public class loanDao implements genericDao<Loan> {
 	}
 
 	public boolean update(Loan c) {
-		// TODO Auto-generated method stub
+		try {
+			PreparedStatement ps;
+			ps = conn.getConn().prepareStatement(SQL_UPDATE);
+			
+			ps.setInt(1, c.getPerson().getIdPerson());
+			ps.setInt(2, c.getComic().getIdComic());
+			ps.setString(3, c.getDate());
+			ps.setInt(2, c.getIdLoan());
+
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			conn.closeConnection();
+		}
 		return false;
 	}
 
@@ -66,7 +83,8 @@ public class loanDao implements genericDao<Loan> {
 
 	public Loan get(Object key) {
 		Loan l = new Loan();
-		
+		Comic c = new Comic();
+	    Person p = new Person();
 		try {
 			
 			PreparedStatement ps;
@@ -78,6 +96,16 @@ public class loanDao implements genericDao<Loan> {
 			res = ps.executeQuery();
 			while(res.next()) {
 				l.setIdLoan(res.getInt("idLoan"));
+				l.setDate(res.getString("date"));
+				c.setNameComic(res.getString("c.nameComic"));
+				c.setIdComic(res.getInt("Comics_idComic"));
+				c.setQuantityComic(res.getInt("c.quantityComic"));
+				c.setReviewComic(res.getString("c.reviewComic"));
+				l.setComic(c);
+				p.setNamePerson(res.getString("p.namePerson"));
+				p.setIdPerson(res.getInt("Persons_idPerson"));
+				p.setTelephonePerson(res.getString("p.telephonePerson"));
+				l.setPerson(p);
 			}
 					
 		} catch (SQLException e) {
@@ -97,22 +125,24 @@ public class loanDao implements genericDao<Loan> {
 			
 			ps = conn.getConn().prepareStatement(SQL_GET_ALL);
 			res = ps.executeQuery();
-			
-			Comic c = new Comic();
-			Person p = new Person();
-			
+		
 			while(res.next()) {
 				
 				Loan l = new Loan();
+				Comic c = new Comic();
+				Person p = new Person();
+				
 				l.setIdLoan(res.getInt("idLoan"));
-				
-				l.setComic(c);
-				c.setNameComic(res.getString("nameComic"));
-				
-				l.setPerson(p);
-				p.setNamePerson(res.getString("namePerson"));
-
 				l.setDate(res.getString("date"));
+				c.setNameComic(res.getString("c.nameComic"));
+				c.setIdComic(res.getInt("Comics_idComic"));
+				c.setQuantityComic(res.getInt("c.quantityComic"));
+				c.setReviewComic(res.getString("c.reviewComic"));
+				l.setComic(c);
+				p.setNamePerson(res.getString("p.namePerson"));
+				p.setIdPerson(res.getInt("Persons_idPerson"));
+				p.setTelephonePerson(res.getString("p.telephonePerson"));
+				l.setPerson(p);
 				
 				list.add(l);
 			}

@@ -28,7 +28,7 @@
 </nav>
 <div class="cuerpo" >
 <div class="galeria">
-  <form action="/Comicstore/eliminar_Personas" method="post">
+  <form action="/Comiqueria/eliminar_Personas" method="post">
     <div class="contenedor-form">
       <div class="ftit renglones">
         <label class="form-tit">Eliminar Persona</label>

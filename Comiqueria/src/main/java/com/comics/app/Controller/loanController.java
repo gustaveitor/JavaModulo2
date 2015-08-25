@@ -20,7 +20,10 @@ public class loanController {
 		
 		return rta;
 	}
-	
+	public boolean updateLoan(Loan l){
+		boolean rta = loandao.update(l);
+		return rta;
+	}
 	public List<Loan> getAll() {
 		List<Loan> list = loandao.getAll();
 		return list;

@@ -30,7 +30,7 @@
 </nav>
 <div class="cuerpo" >
 <div class="galeria">
-  <form action="/Comicstore/eliminar_Comics" method="post">
+  <form action="/Comiqueria/eliminar_Comics" method="post">
     <div class="contenedor-form">
       <div class="ftit renglones">
         <label class="form-tit">Eliminar Comic</label>

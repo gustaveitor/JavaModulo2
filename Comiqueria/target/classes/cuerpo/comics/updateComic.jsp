@@ -28,7 +28,7 @@
 </nav>
 <div class="cuerpo" >
 <div class="galeria">
-  <form action="/Comicstore/actualizar_Comics" method="post">
+  <form action="/Comiqueria/actualizar_Comics" method="post">
     <div class="contenedor-form">
       <div class="ftit renglones">
         <label class="form-tit">Modificar Comic</label>

@@ -30,8 +30,9 @@
 </nav>
 <div class="cuerpo" >
 <div class="galeria">
+<label style="position:relative;float:left;width:100%;color:#333333;font-size:1.5em">Comics disponibles</label>
 	<c:forEach  var="libro" items="${Listado}">
-	 <article class="articulo">
+	 <article  class="articulo" onclick="window.location.href='/Comiqueria/insertar_Prestamos?id=<c:out value="${libro.getIdComic()}"></c:out>'">
 		 <label class="tit-artic"><c:out value="${libro.getNameComic()}"></c:out></label>
 		 <label class="cont-artic">Review <i>:<c:out value="${libro.getReviewComic()}"></c:out></i></label>
 		 <label class="pie-artic">De : <c:out value="${libro.getCompanyComic()}"></c:out></label>

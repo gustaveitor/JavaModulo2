@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Prueba de curso Java</title>
-<link type="text/css" rel="stylesheet" href="/Comicstore/css/estilo.css" />
+<link type="text/css" rel="stylesheet" href="/Comiqueria/css/estilo.css" />
 </head>
 <body>
    
@@ -32,7 +32,7 @@
     <div class="buscar">
       <input type="text" name="txtBuqueda" placeholder="Ingrese busqueda...">
      <button class="vista busquedabut" type="button" name="btnbusq">Buscar</button>
-       <a class ="action" href="/Comicstore/insertar_Comics"><button class="vista cancelacion" type="button" name="alta">Nuevo</button></a>
+       <a class ="action" href="/Comiqueria/insertar_Comics"><button class="vista cancelacion" type="button" name="alta">Nuevo</button></a>
       <button class="vista exit" type="button" name="salir" onclick="">Atras</button>
     </div>
     </div>
@@ -50,8 +50,8 @@
         <td><c:out value="${Listado.get(i).getCompanyComic()}"></c:out></td>
         <td><c:out value="${Listado.get(i).getQuantityComic()}"></c:out></td>
         <td>
-         <div class="wwith">   <a href="/Comicstore/actualizar_Comics?id=${Listado.get(i).getIdComic()}"> <img  src="/Comicstore/imgs/editar.png"></a> </div>
-        <div  class="wwith">    <a href="/Comicstore/eliminar_Comics?id=${Listado.get(i).getIdComic()}"><img src="/Comicstore/imgs/eliminar.png"></a>   </div>
+         <div class="wwith">   <a href="/Comiqueria/actualizar_Comics?id=${Listado.get(i).getIdComic()}"> <img  src="/Comiqueria/imgs/editar.png"></a> </div>
+        <div  class="wwith">    <a href="/Comiqueria/eliminar_Comics?id=${Listado.get(i).getIdComic()}"><img src="/Comiqueria/imgs/eliminar.png"></a>   </div>
          </td></tr>
       </c:when>
       <c:otherwise>
@@ -60,8 +60,8 @@
         <td><c:out value="${Listado.get(i).getCompanyComic()}"></c:out></td>
         <td><c:out value="${Listado.get(i).getQuantityComic()}"></c:out></td>
       <td>
-      <div class="wwith">   <a href="/Comicstore/actualizar_Comics?id=${Listado.get(i).getIdComic()}"> <img  src="/Comicstore/imgs/editar.png"></a> </div>
-        <div  class="wwith">    <a href="/Comicstore/eliminar_Comics?id=${Listado.get(i).getIdComic()}"><img src="/Comicstore/imgs/eliminar.png"></a>   </div>
+      <div class="wwith">   <a href="/Comiqueria/actualizar_Comics?id=${Listado.get(i).getIdComic()}"> <img  src="/Comiqueria/imgs/editar.png"></a> </div>
+        <div  class="wwith">    <a href="/Comiqueria/eliminar_Comics?id=${Listado.get(i).getIdComic()}"><img src="/Comiqueria/imgs/eliminar.png"></a>   </div>
 		</td>
       </tr>
       </c:otherwise>
@@ -83,4 +83,4 @@
 
 </body>
 </html>
-<script src="/Comicstore/js/RecursoJS.js"></script>
+<script src="/Comiqueria/js/RecursoJS.js"></script>

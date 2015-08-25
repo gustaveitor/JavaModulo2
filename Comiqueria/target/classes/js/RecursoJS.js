@@ -74,7 +74,7 @@ function appear(elm, c, step, speed){
 }
 var labelBrand  = document.getElementsByClassName("brand");
 labelBrand[0].addEventListener("click",function(){
-	document.location.href="/Comicstore/index_App";
+	document.location.href="/Comiqueria/index_App";
 	
 });
 /*
