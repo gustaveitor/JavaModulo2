@@ -75,7 +75,15 @@ function appear(elm, c, step, speed){
 var labelBrand  = document.getElementsByClassName("brand");
 labelBrand[0].addEventListener("click",function(){
 	document.location.href="/Comiqueria/index_App";
-	
+});
+var $rows = $('#table tr:not(.bind)');
+$('#search').keyup(function() {
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+    
+    $rows.show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
 });
 /*
 

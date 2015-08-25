@@ -35,7 +35,6 @@ public class eliminar_Prestamos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		IdLoan =Integer.parseInt( request.getParameter("id"));
 		Loan cLoan = new loanController().get(IdLoan);
 		List<Comic> cListado = new ArrayList<Comic>();
@@ -55,7 +54,6 @@ public class eliminar_Prestamos extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		Loan cLoan = new loanController().get(IdLoan);
 		Comic cComic = cLoan.getComic();
 		cComic.setQuantityComic(cLoan.getComic().getQuantityComic() +1);

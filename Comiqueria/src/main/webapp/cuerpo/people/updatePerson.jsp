@@ -39,23 +39,23 @@
           <label class="label-form">Nombre </label>
         </div>
         <div class="">
-          <input class="form-cont" type="text" id="personname" name="personname" value ="<c:out value="${persona.getNamePerson()}"></c:out>" ></div>
+          <input class="form-cont" tabindex=1 required type="text" id="personname" name="personname" value ="<c:out value="${persona.getNamePerson()}"></c:out>" ></div>
         </div>
       <div class="renglones">
         <div class="lab-cont">
           <label class="label-form">Telefono </label>
         </div>
         <div class="">
-          <input class="form-cont" type="text" id="persontel" name="persontel" value ="<c:out value="${persona.getTelephonePerson()}"></c:out>" >
+          <input class="form-cont" tabindex=2 type="text" id="persontel" name="persontel" value ="<c:out value="${persona.getTelephonePerson()}"></c:out>" >
         </div>
 
       </div>
       <div class="renglones">
 
-          <button type="submit" name="guardar">Guardar</button>
+          <button type="submit" name="guardar" tabindex=3 >Guardar</button>
 
 
-          <button type="reset" name="limpiar">Limpiar</button>
+          <button type="reset" name="limpiar" tabindex=4 onclick="window.location.href='/Comiqueria/obtener_Personas" >Atras</button>
 
       </div>
     </div>

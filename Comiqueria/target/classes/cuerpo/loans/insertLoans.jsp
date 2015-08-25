@@ -36,7 +36,7 @@
           <label class="label-form">Persona </label>
         </div>
         <div class="">
-          <select id="personaselect" name="personaselect" >
+          <select tabindex=1 id="personaselect" name="personaselect" >
       			<c:forEach var="personas" items="${pListado}">
       			<option
       	
@@ -54,7 +54,7 @@
                 <label class="label-form">Comic </label>
           </div>
           <div class="">
-             <select  id="comicselect" name="comicselect">
+             <select tabindex=2 id="comicselect" name="comicselect">
              
              	<c:forEach var="comiques" items="${cListado}">
              	<c:choose> 
@@ -82,16 +82,16 @@
             <label class="label-form">Hasta </label>
         </div>
         <div class="">
-            <input type="date" id="hasta" name="hasta" class="form-cont"> 
+            <input required tabindex=3 type="date" id="hasta" name="hasta" class="form-cont"> 
         </div>
 
       </div>
       <div class="renglones">
 
-          <button type="submit" name="guardar">Guardar</button>
+          <button tabindex=4 type="submit" name="guardar">Guardar</button>
 
 
-          <button type="reset" name="limpiar">Limpiar</button>
+          <button tabindex=5  type="reset" name="limpiar">Limpiar</button>
 
       </div>
     </div>

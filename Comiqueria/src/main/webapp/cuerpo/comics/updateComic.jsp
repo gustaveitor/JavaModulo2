@@ -38,14 +38,14 @@
           <label class="label-form">Comic </label>
         </div>
         <div class="">
-          <input class="form-cont" type="text" id="comicname" name="comicname" value="<c:out value="${libro.getNameComic()}"></c:out>"/></div>
+          <input class="form-cont" type="text" id="comicname" name="comicname" tabindex=1 value="<c:out value="${libro.getNameComic()}"></c:out>"/></div>
         </div>
       <div class="renglones">
         <div class="lab-cont">
           <label class="label-form">Publica </label>
         </div>
         <div class="">
-          <input class="form-cont" type="text" id="comicpub" name="comicpub"  value =<c:out value="${libro.getCompanyComic()}"></c:out> />
+          <input class="form-cont" type="text" id="comicpub" name="comicpub" tabindex=2 value =<c:out value="${libro.getCompanyComic()}"></c:out> />
         </div>
 
       </div>
@@ -54,7 +54,7 @@
                 <label class="label-form">Stock </label>
           </div>
           <div class="">
-                    <input class="form-cont" type="number" id="comicstock" name="comicstock" value ="<c:out value="${Integer.parseInt(libro.getQuantityComic())}"></c:out>"/>
+                    <input class="form-cont" type="number" id="comicstock" tabindex=3 name="comicstock" value ="<c:out value="${Integer.parseInt(libro.getQuantityComic())}"></c:out>"/>
           </div>
 
       </div>
@@ -63,14 +63,14 @@
             <label class="label-form">Review </label>
         </div>
         <div class="">
-            <textarea class="form-cont"  id="comicreview" name="comicreview"> <c:out value="${libro.getReviewComic()}"></c:out></textarea>
+            <textarea class="form-cont"  id="comicreview" tabindex=4 name="comicreview"> <c:out value="${libro.getReviewComic()}"></c:out></textarea>
         </div>
 
       </div>
       <div class="renglones">
 
-          <button type="submit" name="guardar">Guardar</button>
-          <button type="button" name="limpiar" onclick="window.history.back();">Atras</button>
+          <button type="submit" tabindex=5 name="guardar">Guardar</button>
+          <button type="button" tabindex=6 name="limpiar" onclick="window.history.back();">Atras</button>
 
       </div>
     </div>

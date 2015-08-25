@@ -10,10 +10,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Prueba de curso Java</title>
 <link type="text/css" rel="stylesheet" href="/Comiqueria/css/estilo.css" />
+<script src="/Comiqueria/js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
-   
-
 <nav role="navigation">
 	<!--Contenido de imagen perfil y marca-->
 	<div class ="barra clearfix">	
@@ -33,14 +32,13 @@
 <div class="galeria">
   <div class="busqueda">
     <div class="buscar">
-      <input type="text" name="txtBuqueda" placeholder="Ingrese busqueda...">
-     <button class="vista busquedabut" type="button" name="btnbusq">Buscar</button>
+      <input type="text"  id="search"  name="txtBuqueda" placeholder="Ingrese busqueda...">
        <a  class ="action" href="/Comiqueria/insertar_Personas"><button class="vista cancelacion" type="button" name="alta">Nuevo</button></a>
       <button class="vista exit" type="button" name="salir" onclick="">Atras</button>
     </div>
     </div>
-    <div class="datagrid"><table>
-      <thead><tr><th>Name</th><th>Telephone</th><th></th></tr></thead>
+    <div class="datagrid"><table  id="table">
+      <thead><tr  class="bind"><th>Name</th><th>Telephone</th><th></th></tr></thead>
    <tfoot><tr><td colspan="4"></tr></tfoot>
    <tbody>
     <c:choose>
