@@ -14,6 +14,7 @@ import com.comics.app.Controller.loanController;
 import com.comics.app.Controller.comicController;
 import com.comics.app.Controller.personController;
 import com.comics.app.Model.Comic;
+import com.comics.app.ViewModel.comicViewModel;
 
 /**
  * Servlet implementation class insertar_Prestamos
@@ -35,8 +36,8 @@ public class insertar_Prestamos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Comic> cListado = new ArrayList<Comic>();
-		for (Comic comiques: new comicController().getAll() ){
+		List<comicViewModel> cListado = new ArrayList<comicViewModel>();
+		for (comicViewModel comiques: new comicController().getAll() ){
 			if (comiques.getQuantityComic() > 0){
 			cListado.add(comiques);
 			}

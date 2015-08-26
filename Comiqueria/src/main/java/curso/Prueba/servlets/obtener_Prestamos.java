@@ -29,6 +29,7 @@ public class obtener_Prestamos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		request.setAttribute("Listado", new loanController().getAll());
 		request.getRequestDispatcher("cuerpo/loans/indexLoans.jsp").forward(request, response);
 	}

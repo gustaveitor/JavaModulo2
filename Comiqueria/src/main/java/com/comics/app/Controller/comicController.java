@@ -1,9 +1,11 @@
 package com.comics.app.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.comics.app.Dao.comicDao;
 import com.comics.app.Model.Comic;
+import com.comics.app.ViewModel.comicViewModel;
 
 public class comicController {
 	
@@ -19,8 +21,18 @@ public class comicController {
 		return c;
 	}
 	
-	public List<Comic> getAll() {
-		List<Comic> list = comicdao.getAll();
+	public List<comicViewModel> getAll() {
+		List<comicViewModel> list = new ArrayList<comicViewModel>();
+		for (Comic comic : comicdao.getAll()){
+			list.add(
+					new comicViewModel(comic.getIdComic()
+							,comic.getNameComic()
+							,comic.getCompanyComic()
+							,comic.getReviewComic()
+							,comic.getQuantityComic(),
+							comicdao.check(comic.getIdComic())));
+		}
+		
 		return list;
 	}
 	

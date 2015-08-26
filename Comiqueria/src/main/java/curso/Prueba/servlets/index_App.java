@@ -4,14 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
- 
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.comics.app.Controller.comicController;
-import com.comics.app.Model.Comic;
+import com.comics.app.ViewModel.comicViewModel;
 
 /**
  * Servlet implementation class index_App
@@ -33,9 +34,9 @@ public class index_App extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Comic> Comiques = new ArrayList<Comic>();
+	    List<comicViewModel> Comiques = new ArrayList<comicViewModel>();
 		
-				for	(Comic p : new comicController().getAll()){
+				for	(comicViewModel p : new comicController().getAll()){
 					if ( p.getQuantityComic() > 0 ){
 						Comiques.add(p);
 					}

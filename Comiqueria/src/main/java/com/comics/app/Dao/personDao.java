@@ -17,6 +17,10 @@ public class personDao implements genericDao<Person> {
 	private final String SQL_GET_ALL = "SELECT * FROM persons";
 	private final String SQL_GET = "SELECT * FROM persons WHERE ( idPerson = ?)";
 	
+	// SQL VALIDADOR
+		private final String SQL_CHECK = "select (case when (select count(Persons_idPerson) from comics.loans where Persons_idPerson = ?)>0 then 1 else 0 end) as verdad";
+
+	
 	private final connectionDB conn = connectionDB.getConnection();
 	
 	public boolean add(Person c) {
@@ -38,7 +42,32 @@ public class personDao implements genericDao<Person> {
 		}
 		return false;
 	}
-
+	public boolean check(int key){
+	    PreparedStatement ps;
+	    ResultSet rs;
+		try {
+			ps = conn.getConn().prepareStatement(SQL_CHECK);
+			ps.setInt(1, key);
+			rs = ps.executeQuery();
+			  while(rs.next()){
+				if (rs.getInt(1)==1){
+					return true;
+					
+				}
+				else{
+					return false;
+				}
+			
+			  }
+		  return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			conn.closeConnection();
+		}
+   }
 	public boolean update(Person c) {
 	PreparedStatement ps;
 		
@@ -58,12 +87,12 @@ public class personDao implements genericDao<Person> {
 		return false;
 	}
 
-	public boolean delete(Object key) {
+	public boolean delete(int key) {
 		PreparedStatement ps;
 		
 		try {
 			ps = conn.getConn().prepareStatement(SQL_DELETE);
-			ps.setInt(1, (Integer)key);
+			ps.setInt(1, key);
 			
 			if(ps.executeUpdate() > 0) {
 				return true;
@@ -77,7 +106,7 @@ public class personDao implements genericDao<Person> {
 		return false;
 	}
 
-	public Person get(Object key) {
+	public Person get(int key) {
 		Person p = new Person();
 		
 		try {
@@ -86,7 +115,7 @@ public class personDao implements genericDao<Person> {
 			ResultSet res;
 			
 			ps = conn.getConn().prepareStatement(SQL_GET);
-			ps.setInt(1, (Integer)key);
+			ps.setInt(1, key);
 			
 			res = ps.executeQuery();
 			while(res.next()) {

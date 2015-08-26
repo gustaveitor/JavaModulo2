@@ -16,7 +16,7 @@
 	<!--Contenido de imagen perfil y marca-->
 	<div class ="barra clearfix">	
 		<!--<div class="profdiv"><img class="profile" src="https://f1.bcbits.com/img/0000101507_10.jpg"></div>-->
-		<div class="brandiv clearfix"><label class="brand">Comics</label></div>
+		<div class="brandiv clearfix"><label class="brand">Comic</label><a href="/Comiqueria/login_App"  class="login">[Inicie sesion]</a></div>
 	</div>
 	<!--Menu de opciones para sistema-->
 	<div class="menudiv">

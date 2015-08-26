@@ -14,6 +14,9 @@ public class comicDao implements genericDao<Comic> {
 	private final String SQL_GET_ALL = "SELECT * FROM comics";
 	private final String SQL_GET = "SELECT * FROM comics WHERE ( idComic = ?)";
 	
+	// SQL VALIDADOR
+	private final String SQL_CHECK = "select (case when (select count(Comics_idComic) from comics.loans where Comics_idComic = ?)>0 then 1 else 0 end) as verdad";
+
 	private final connectionDB conn = connectionDB.getConnection();
 	
 	public boolean add(Comic c) {
@@ -37,7 +40,31 @@ public class comicDao implements genericDao<Comic> {
 		}
 		return false;
 	}
-
+   public boolean check(int key){
+	    PreparedStatement ps;
+	    ResultSet rs;
+		try {
+			ps = conn.getConn().prepareStatement(SQL_CHECK);
+			ps.setInt(1, key);
+			rs = ps.executeQuery();
+		  while (rs.next()){
+			 if	(rs.getInt(1)==1){
+				 return true;
+			 }
+			 else
+			 {
+				 return false;
+			 }
+		  }
+		  return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			conn.closeConnection();
+		}
+   }
 	public boolean update(Comic c) {
 		PreparedStatement ps;
 		
@@ -60,12 +87,12 @@ public class comicDao implements genericDao<Comic> {
 		return false;
 	}
 
-	public boolean delete(Object key) {
+	public boolean delete(int key) {
 		PreparedStatement ps;
 		
 		try {
 			ps = conn.getConn().prepareStatement(SQL_DELETE);
-			ps.setInt(1, (Integer)key);
+			ps.setInt(1, key);
 			
 			if(ps.executeUpdate() > 0) {
 				return true;
@@ -79,7 +106,7 @@ public class comicDao implements genericDao<Comic> {
 		return false;
 	}
 
-	public Comic get(Object key) {		
+	public Comic get(int key) {		
 		Comic c = new Comic();
 		
 		try {
@@ -88,7 +115,7 @@ public class comicDao implements genericDao<Comic> {
 			ResultSet res;
 			
 			ps = conn.getConn().prepareStatement(SQL_GET);
-			ps.setInt(1, (Integer)key);
+			ps.setInt(1, key);
 			
 			res = ps.executeQuery();
 			while(res.next()) {

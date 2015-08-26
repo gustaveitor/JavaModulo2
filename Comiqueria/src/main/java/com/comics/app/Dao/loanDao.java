@@ -16,7 +16,7 @@ public class loanDao implements genericDao<Loan> {
 	private final String SQL_GET_ALL = "SELECT idLoan,c.nameComic,date, Persons_idPerson,c.companyComic,c.reviewComic,c.quantityComic,Comics_idComic ,p.namePerson,p.telephonePerson FROM comics.loans inner join comics.comics as c on c.idComic=loans.Comics_idComic inner join comics.persons as p on p.idPerson = loans.Persons_idPerson";
 	private final String SQL_DELETE = "DELETE FROM loans WHERE idLoan = ?";
 	private final String SQL_GET = "SELECT idLoan,c.nameComic,date, Persons_idPerson,c.companyComic,c.reviewComic,c.quantityComic,Comics_idComic ,p.namePerson,p.telephonePerson FROM comics.loans inner join comics.comics as c on c.idComic=loans.Comics_idComic inner join comics.persons as p on p.idPerson = loans.Persons_idPerson WHERE ( idLoan = ?)";
-	private final String SQL_UPDATE = "UPDATE loans SET Persons_idPerson=?, Comics_idComic=?,date=?  where idLoan=?";
+	private final String SQL_UPDATE = "UPDATE comics.loans SET Persons_idPerson=?, Comics_idComic=?,date=?  where idLoan=?";
 	private final connectionDB conn = connectionDB.getConnection();
 	
 	public boolean add(Loan c) {
@@ -48,7 +48,7 @@ public class loanDao implements genericDao<Loan> {
 			ps.setInt(1, c.getPerson().getIdPerson());
 			ps.setInt(2, c.getComic().getIdComic());
 			ps.setString(3, c.getDate());
-			ps.setInt(2, c.getIdLoan());
+			ps.setInt(4, c.getIdLoan());
 
 			if(ps.executeUpdate() > 0) {
 				return true;
@@ -62,12 +62,12 @@ public class loanDao implements genericDao<Loan> {
 		return false;
 	}
 
-	public boolean delete(Object key) {
+	public boolean delete(int key) {
 		PreparedStatement ps;
 		
 		try {
 			ps = conn.getConn().prepareStatement(SQL_DELETE);
-			ps.setInt(1, (Integer)key);
+			ps.setInt(1, key);
 			
 			if(ps.executeUpdate() > 0) {
 				return true;
@@ -81,20 +81,21 @@ public class loanDao implements genericDao<Loan> {
 		return false;
 	}
 
-	public Loan get(Object key) {
+	public Loan get(int key) {
 		Loan l = new Loan();
-		Comic c = new Comic();
-	    Person p = new Person();
 		try {
 			
 			PreparedStatement ps;
 			ResultSet res;
 			
 			ps = conn.getConn().prepareStatement(SQL_GET);
-			ps.setInt(1, (Integer)key);
+			ps.setInt(1, key);
 			
 			res = ps.executeQuery();
 			while(res.next()) {
+			
+				Comic c = new Comic();
+			    Person p = new Person();
 				l.setIdLoan(res.getInt("idLoan"));
 				l.setDate(res.getString("date"));
 				c.setNameComic(res.getString("c.nameComic"));

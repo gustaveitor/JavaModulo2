@@ -1,8 +1,10 @@
 package com.comics.app.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.comics.app.Model.Person;
+import com.comics.app.ViewModel.personViewModel;
 import com.comics.app.Dao.personDao;
 
 public class personController {
@@ -26,8 +28,16 @@ public class personController {
 		return p;
 	}
 	
-	public List<Person> getAll() {
-		List<Person> list = persondao.getAll();
+	public List<personViewModel> getAll() {
+		List<personViewModel> list =new ArrayList<personViewModel>();
+		for(Person person : persondao.getAll()){
+			list.add(new personViewModel(
+					person.getIdPerson(),
+					person.getNamePerson(),
+					person.getTelephonePerson(),
+					persondao.check(person.getIdPerson())
+					));
+		}
 		return list;
 	}
 	

@@ -15,18 +15,8 @@
 	<!--Contenido de imagen perfil y marca-->
 	<div class ="barra clearfix">	
 		<!--<div class="profdiv"><img class="profile" src="https://f1.bcbits.com/img/0000101507_10.jpg"></div>-->
-			<div class="brandiv clearfix"><label class="brand">Comic</label><a href="/Comiqueria/login_App"  class="login">
-	<c:choose>
-			<c:when test="${sessionScope.Usuario ne null}">
-			[<c:out value="${sessionScope.Usuario }"></c:out>]
-			</c:when>
-			<c:otherwise>
-			[Inicie sesion]
-		
-			</c:otherwise>
-			</c:choose>
-</a></div>
-	</div>
+		<div class="brandiv clearfix"><label class="brand">Comic</label><a href="/Comiqueria/login_App"  class="login">[Inicie sesion]</a></div>
+		</div>
 	<!--Menu de opciones para sistema-->
 	<div class="menudiv">
 		<div class="menubar">
@@ -39,14 +29,40 @@
 </nav>
 <div class="cuerpo" >
 <div class="galeria">
-<label style="position:relative;float:left;width:100%;color:#333333;font-size:1.5em">Comics disponibles</label>
-	<c:forEach  var="libro" items="${Listado}">
-	 <article  class="articulo" onclick="window.location.href='/Comiqueria/insertar_Prestamos?id=<c:out value="${libro.getIdComic()}"></c:out>'">
-		 <label class="tit-artic"><c:out value="${libro.getNameComic()}"></c:out></label>
-		 <label class="cont-artic">Review <i>:<c:out value="${libro.getReviewComic()}"></c:out></i></label>
-		 <label class="pie-artic">De : <c:out value="${libro.getCompanyComic()}"></c:out></label>
-	 </article>	
-	</c:forEach>
+  <form action="/Comiqueria/login_App" method="post">
+    <div class="contenedor-form">
+      <div class="ftit renglones">
+        <label class="form-tit">Iniciar sesion</label>
+      </div>
+      <div class="renglones">
+        <div class="lab-cont">
+          <label class="label-form">Usuario </label>
+        </div>
+        <div class="">
+          <input class="form-cont" required tabindex=1 type="text" id="username" name="username"/></div>
+        </div>
+      <div class="renglones">
+        <div class="lab-cont">
+          <label class="label-form">Contraseña </label>
+        </div>
+        <div class="">
+          <input class="form-cont" required tabindex=2 type="password" id="password" name="password"/>
+        </div>
+
+      </div>
+      <c:if test="${mensaje ne null}">
+       <div class="renglones">
+        <div class="lab-cont">
+          <label class="label-form error"><c:out value="${mensaje }"></c:out> </label>
+        </div>
+      </div>     
+      </c:if>
+      <div class="renglones">
+          <button type="submit" tabindex=3 name="guardar">Ingresar</button>
+          <button type="button" onclick="window.location.href='/Comiqueria/index_App';" tabindex=4 name="limpiar">Atras</button>
+      </div>
+    </div>
+  </form>
 </div>
 </div>
 <footer>

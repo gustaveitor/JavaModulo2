@@ -2,8 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.*"%>
-<%@page import="com.comics.app.Model.Comic" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,11 +11,23 @@
 <script src="/Comiqueria/js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
+   
+<c:set var="rol"  value="${sessionScope.Roles}"/>
 <nav role="navigation">
 	<!--Contenido de imagen perfil y marca-->
 	<div class ="barra clearfix">	
 		<!--<div class="profdiv"><img class="profile" src="https://f1.bcbits.com/img/0000101507_10.jpg"></div>-->
-		<div class="brandiv clearfix"><label class="brand">Comics</label></div>
+		<div class="brandiv clearfix"><label class="brand">Comic</label><a href="/Comiqueria/login_App"  class="login">
+	<c:choose>
+			<c:when test="${sessionScope.Usuario ne null}">
+			[<c:out value="${sessionScope.Usuario }"></c:out>]
+			</c:when>
+			<c:otherwise>
+			[Inicie sesion]
+		
+			</c:otherwise>
+			</c:choose>		
+</a></div>
 	</div>
 	<!--Menu de opciones para sistema-->
 	<div class="menudiv">
@@ -33,7 +43,9 @@
   <div class="busqueda">
     <div class="buscar">
       <input type="text"  id="search"  name="txtBuqueda" placeholder="Ingrese busqueda...">
+         <c:if test="${rol[0] eq 'admin' }">
        <a  class ="action" href="/Comiqueria/insertar_Personas"><button class="vista cancelacion" type="button" name="alta">Nuevo</button></a>
+      </c:if>
       <button class="vista exit" type="button" name="salir" onclick="">Atras</button>
     </div>
     </div>
@@ -50,10 +62,16 @@
         <td>  <c:out value="${Listado.get(i).getNamePerson()}"></c:out></td>
         <td><c:out value="${Listado.get(i).getTelephonePerson()}"></c:out></td>
         <td>
-         <div class="wwith">   <a href="/Comiqueria/actualizar_Personas?id=${Listado.get(i).getIdPerson()}"> <img  src="/Comiqueria/imgs/editar.png"></a> </div>
-        <div  class="wwith">    <a href="/Comiqueria/eliminar_Personas?id=${Listado.get(i).getIdPerson()}"><img src="/Comiqueria/imgs/eliminar.png"></a>   </div>
-   
+        <c:if test="${rol[0] eq 'admin' }">
+          <div class="wwith">   <a href="/Comiqueria/actualizar_Personas?id=${Listado.get(i).getIdPerson()}"> <img  src="/Comiqueria/imgs/editar.png"></a> </div>
+        <c:choose>
+		   <c:when test="${!Listado.get(i).getDeletable() }">
+		          <div  class="wwith">    <a href="/Comiqueria/eliminar_Personas?id=${Listado.get(i).getIdPerson()}"><img src="/Comiqueria/imgs/eliminar.png"></a>   </div>
+		        </c:when>
+		 </c:choose>
       
+        </c:if>
+       
          </td></tr>
       </c:when>
       <c:otherwise>
@@ -61,9 +79,17 @@
        <td>  <c:out value="${Listado.get(i).getNamePerson()}"></c:out></td>
         <td><c:out value="${Listado.get(i).getTelephonePerson()}"></c:out></td>
         <td>
-         <div class="wwith">   <a href="/Comiqueria/actualizar_Personas?id=${Listado.get(i).getIdPerson()}"> <img  src="/Comiqueria/imgs/editar.png"></a> </div>
-        <div  class="wwith">    <a href="/Comiqueria/eliminar_Personas?id=${Listado.get(i).getIdPerson()}"><img src="/Comiqueria/imgs/eliminar.png"></a>   </div>
-   
+               <c:if test="${rol[0] eq 'admin' }">
+          <div class="wwith">   <a href="/Comiqueria/actualizar_Personas?id=${Listado.get(i).getIdPerson()}"> <img  src="/Comiqueria/imgs/editar.png"></a> </div>
+        <c:choose>
+		   <c:when test="${!Listado.get(i).getDeletable() }">
+		          <div  class="wwith">    <a href="/Comiqueria/eliminar_Personas?id=${Listado.get(i).getIdPerson()}"><img src="/Comiqueria/imgs/eliminar.png"></a>   </div>
+		        </c:when>
+		 </c:choose>
+      
+        </c:if>
+      
+      
        
 </td>
       </tr>

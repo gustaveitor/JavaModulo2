@@ -21,7 +21,7 @@ nav{
 .menubut{
 	width:50px;
 }
-brand{
+.brand{
 	cursor:pointer;
 }
 .brandiv, .profdiv, .menubar{float:left;max-height:80px;min-height:61px}
@@ -51,9 +51,11 @@ brand{
 	margin-top:1em;
 	margin-bottom:auto;
 	vertical-align: middle;
+  width: 12em;
     color:white;
 	font-size:1.5em;
 	display:block;
+  float: left;
 }
 .profile{
 	width:80px;
@@ -309,6 +311,15 @@ margin-top:0.8em;
 position:relative;
 width:90%;
 float:left;
+}
+.login{
+  font-size:1.3em;
+  text-decoration:none;
+  position:absolute;
+  float:left;
+  display:block;
+   margin:1.3em 0 0 6.5em;
+  color:white;
 }
 
 

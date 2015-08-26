@@ -15,6 +15,7 @@ import com.comics.app.Controller.loanController;
 import com.comics.app.Controller.personController;
 import com.comics.app.Model.Comic;
 import com.comics.app.Model.Loan;
+import com.comics.app.ViewModel.comicViewModel;
 
 /**
  * Servlet implementation class eliminar_Prestamos
@@ -37,8 +38,8 @@ public class eliminar_Prestamos extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IdLoan =Integer.parseInt( request.getParameter("id"));
 		Loan cLoan = new loanController().get(IdLoan);
-		List<Comic> cListado = new ArrayList<Comic>();
-		for (Comic comiques: new comicController().getAll() ){
+		List<comicViewModel> cListado = new ArrayList<comicViewModel>();
+		for (comicViewModel comiques : new comicController().getAll() ){
 			if (comiques.getIdComic()==cLoan.getComic().getIdComic() || comiques.getQuantityComic() > 0){
 			cListado.add(comiques);
 			}
