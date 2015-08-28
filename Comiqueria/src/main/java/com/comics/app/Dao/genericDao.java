@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface genericDao <C> {
 	
-	public boolean add(C c);
-	public boolean update(C c);
-	public boolean delete(int key);
-	public C get(int key);
-	public List<C> getAll();
+	public boolean add(C c) throws Exception;
+	public boolean update(C c) throws Exception;
+	public boolean delete(int key) throws Exception;
+	public C get(int key) throws Exception;
+	public List<C> getAll() throws Exception;
 	
 }

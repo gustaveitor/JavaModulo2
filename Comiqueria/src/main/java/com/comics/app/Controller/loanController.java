@@ -11,30 +11,33 @@ public class loanController {
 	
 	loanDao loandao = new loanDao();
 	
-	public boolean addLoan (Comic c, Person p, String d) {
+	public boolean addLoan(Comic c, Person p, String d) throws Exception {
 		Loan l = new Loan();
 		l.setComic(c);
 		l.setPerson(p);
 		l.setDate(d);
-		boolean rta = loandao.add(l);
+		boolean rta;
 		
+			rta = loandao.add(l);
 		return rta;
+		
+		
 	}
-	public boolean updateLoan(Loan l){
+	public boolean updateLoan(Loan l) throws Exception{
 		boolean rta = loandao.update(l);
 		return rta;
 	}
-	public List<Loan> getAll() {
+	public List<Loan> getAll() throws Exception {
 		List<Loan> list = loandao.getAll();
 		return list;
 	}
 	
-	public boolean delete(int key) {
+	public boolean delete(int key) throws Exception {
 		boolean rta = loandao.delete(key);		
 		return rta;
 	}
 	
-	public Loan get (int key) {
+	public Loan get (int key) throws Exception {
 		Loan l = new Loan();
 		l = loandao.get(key);
 		return l;

@@ -5,9 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.comics.app.Model.Comic;
 import com.comics.app.Model.Role;
+import com.comics.app.Classes.exceptionConverter;
 
 public class roleDao  implements genericDao<Role> {
 
@@ -19,7 +18,7 @@ public class roleDao  implements genericDao<Role> {
 	private final connectionDB conn = connectionDB.getConnection();
 	
 	@Override
-	public boolean add(Role c) {
+	public boolean add(Role c) throws Exception {
 		try {
 			PreparedStatement ps;
 			ps = conn.getConn().prepareStatement(SQL_INSERT);
@@ -31,7 +30,8 @@ public class roleDao  implements genericDao<Role> {
 			}			
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos ROLES", e) ;
 		} finally {
 			conn.closeConnection();
 		}
@@ -39,7 +39,7 @@ public class roleDao  implements genericDao<Role> {
 	}
 
 	@Override
-	public boolean update(Role c) {
+	public boolean update(Role c) throws Exception {
 	PreparedStatement ps;
 		
 		try {
@@ -50,7 +50,9 @@ public class roleDao  implements genericDao<Role> {
 				return true;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos ROLES", e) ;
+		
 		} finally {
 			conn.closeConnection();
 		}
@@ -58,7 +60,7 @@ public class roleDao  implements genericDao<Role> {
 	}
 
 	@Override
-	public boolean delete(int key) {
+	public boolean delete(int key) throws Exception {
 		PreparedStatement ps;
 		
 		try {
@@ -70,7 +72,9 @@ public class roleDao  implements genericDao<Role> {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos ROLES", e) ;
+		
 		} finally {
 			conn.closeConnection();
 		}
@@ -78,7 +82,7 @@ public class roleDao  implements genericDao<Role> {
 	}
 
 	@Override
-	public Role get(int key) {
+	public Role get(int key) throws Exception {
      Role c = new Role();
 		
 		try {
@@ -96,7 +100,9 @@ public class roleDao  implements genericDao<Role> {
 			}
 					
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos ROLES", e) ;
+		
 		} finally {
 			conn.closeConnection();
 		}
@@ -104,7 +110,7 @@ public class roleDao  implements genericDao<Role> {
 	}
 
 	@Override
-	public List<Role> getAll() {
+	public List<Role> getAll() throws Exception {
 		List<Role> list = new ArrayList<Role>();
 		
 		try {
@@ -124,7 +130,9 @@ public class roleDao  implements genericDao<Role> {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos ROLES", e) ;
+		
 		} finally {
 			conn.closeConnection();
 		}

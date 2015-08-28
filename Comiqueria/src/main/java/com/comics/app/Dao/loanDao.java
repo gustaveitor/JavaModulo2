@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.comics.app.Classes.exceptionConverter;
 import com.comics.app.Model.Comic;
 import com.comics.app.Model.Loan;
 import com.comics.app.Model.Person;
@@ -19,7 +20,7 @@ public class loanDao implements genericDao<Loan> {
 	private final String SQL_UPDATE = "UPDATE comics.loans SET Persons_idPerson=?, Comics_idComic=?,date=?  where idLoan=?";
 	private final connectionDB conn = connectionDB.getConnection();
 	
-	public boolean add(Loan c) {
+	public boolean add(Loan c) throws Exception {
 		try {
 			PreparedStatement ps;
 			ps = conn.getConn().prepareStatement(SQL_INSERT);
@@ -33,14 +34,15 @@ public class loanDao implements genericDao<Loan> {
 			}			
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos PRESTAMOS", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return false;
 	}
 
-	public boolean update(Loan c) {
+	public boolean update(Loan c) throws Exception {
 		try {
 			PreparedStatement ps;
 			ps = conn.getConn().prepareStatement(SQL_UPDATE);
@@ -55,14 +57,15 @@ public class loanDao implements genericDao<Loan> {
 			}			
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos PRESTAMOS", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return false;
 	}
 
-	public boolean delete(int key) {
+	public boolean delete(int key) throws Exception {
 		PreparedStatement ps;
 		
 		try {
@@ -74,14 +77,15 @@ public class loanDao implements genericDao<Loan> {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos PRESTAMOS", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return false;
 	}
 
-	public Loan get(int key) {
+	public Loan get(int key)  throws Exception{
 		Loan l = new Loan();
 		try {
 			
@@ -110,14 +114,15 @@ public class loanDao implements genericDao<Loan> {
 			}
 					
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos PRESTAMOS", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return l;
 	}
 
-	public List<Loan> getAll() {
+	public List<Loan> getAll()  throws Exception{
 		List<Loan> list = new ArrayList<Loan>();
 		
 		try {
@@ -149,7 +154,8 @@ public class loanDao implements genericDao<Loan> {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos PRESTAMOS", e) ;
 		} finally {
 			conn.closeConnection();
 		}

@@ -168,12 +168,16 @@ footer a{text-decoration:none;color:#C5CAE9;height:50px;}
 .tit-artic{
 	color:white;
 	margin-left:1em;
+	word-wrap:break-word;
+width:90%;
 }
 .cont-artic{
 	display:block;
 margin:0 .1em 0 .5em ;
 color:white;
 font-size:.8em;
+word-wrap:break-word;
+width:90%;
 }
 .pie-artic{
 	color:white;
@@ -181,9 +185,11 @@ margin:auto .1em 0 .5em ;
 font-size:.8em;
 display:block;
 position:absolute;
+word-wrap:break-word;
+width:90%;
 }
 
-input[type="text"],input[type="date"],input[type="number"], select{
+input[type="text"],input[type="date"],input[type="number"],input[type="password"], select{
 background-color:transparent;
 border-style:solid;
 border-width:0 0 .1em 0;
@@ -192,7 +198,7 @@ color:#333333;
 width:15em;
 font-size:1.25em;
 }
-input[type="text"],input[type="date"],input[type="number"],textarea, select{
+input[type="text"],input[type="date"],input[type="number"],textarea,input[type="password"], select{
   -webkit-transition: all 0.30s ease-in-out;
   -moz-transition: all 0.30s ease-in-out;
   -ms-transition: all 0.30s ease-in-out;
@@ -202,7 +208,7 @@ input[type="text"],input[type="date"],input[type="number"],textarea, select{
   margin: 5px 1px 3px 0px;
   border: 1px solid #DDDDDD;
 }
-input[type="date"]:focus,input[type="number"]:focus,input[type=text]:focus, textarea:focus, select:focus {
+input[type="date"]:focus,input[type="number"]:focus,input[type=text]:focus, textarea:focus,input[type="password"]:focus, select:focus {
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
   border: 1px solid rgba(81, 203, 238, 1);
 }
@@ -261,7 +267,7 @@ color:#333333 ;
 }
 
 .lab-cont{
-  width:5em;
+  width:7em;
 }
 .wwith{
 	border-radius:100%;
@@ -321,7 +327,10 @@ float:left;
    margin:1.3em 0 0 6.5em;
   color:white;
 }
-
+td{
+	max-width:10em;
+	word-wrap: break-word;
+}
 
 
         .datagrid table {

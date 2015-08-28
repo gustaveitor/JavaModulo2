@@ -1,21 +1,4 @@
-//Este javascript esta comentado porque anteriormente lo hacia con el mouse hover y me parecio al pedo
-/*
-var botonesMenu = document.getElementsByClassName("menudesplegado");
-var divs = document.getElementsByClassName("menudiv")
-divs[0].addEventListener("mouseover",function(){
-		for (var i = botonesMenu.length - 1; i >= 0; i--) {
-		botonesMenu[i].style.visibility="visible";
-	};
-});
-divs[0].addEventListener("mouseout",function(){
-	for (var i = botonesMenu.length - 1; i >= 0; i--) {
-	botonesMenu[i].style.visibility="hidden";
-	};
-});
-*/
-
 //Eventos de click para la apertura del menu
-
 var menuOpciones= document.getElementById("opciones");
 var botonesMenu = document.getElementsByClassName("menudesplegado");
 var i=0;
@@ -38,14 +21,21 @@ menuOpciones.addEventListener("click",function(){
 var eventoBut = document.getElementsByClassName("eventbut");
 var twitterBut = document.getElementsByClassName("tweet");
 var contactoBut = document.getElementsByClassName("conmenu");
-twitterBut[0].firstChild.addEventListener("mouseover",function(){ appear(document.getElementById('lbltweet'), 0, 5, 20)});
-twitterBut[0].firstChild.addEventListener("mouseleave",function(){ appear(document.getElementById('lbltweet'), 100, -5, 20)});
+if (twitterBut.length >0){
+	twitterBut[0].firstChild.addEventListener("mouseover",function(){ appear(document.getElementById('lbltweet'), 0, 5, 20)});
+	twitterBut[0].firstChild.addEventListener("mouseleave",function(){ appear(document.getElementById('lbltweet'), 100, -5, 20)});	
+}
+if (eventoBut != 'undefined' & eventoBut !=null){
+	eventoBut[0].firstChild.addEventListener("mouseover",function(){ appear(document.getElementById('lblevent'), 0, 5, 20)});
+	eventoBut[0].firstChild.addEventListener("mouseleave",function(){ appear(document.getElementById('lblevent'), 100, -5, 20)});
 
-eventoBut[0].firstChild.addEventListener("mouseover",function(){ appear(document.getElementById('lblevent'), 0, 5, 20)});
-eventoBut[0].firstChild.addEventListener("mouseleave",function(){ appear(document.getElementById('lblevent'), 100, -5, 20)});
+}
+if (contactoBut != 'undefined' & contactoBut !=null){
+	
+	contactoBut[0].firstChild.addEventListener("mouseover",function(){ appear(document.getElementById('lblcontact'), 0, 5, 20)});
+	contactoBut[0].firstChild.addEventListener("mouseleave",function(){ appear(document.getElementById('lblcontact'), 100, -5, 20)});
 
-contactoBut[0].firstChild.addEventListener("mouseover",function(){ appear(document.getElementById('lblcontact'), 0, 5, 20)});
-contactoBut[0].firstChild.addEventListener("mouseleave",function(){ appear(document.getElementById('lblcontact'), 100, -5, 20)});
+}
 //appear(document.getElementsByTagName('DIV')[0], 100, -5, 40);
 function appear(elm, c, step, speed){
     var t_o;
@@ -66,7 +56,7 @@ function appear(elm, c, step, speed){
             //1 opac , 0 transp
             return; 
         }
-        //modern browsers
+        //browsers
         elm.style.opacity = opacity;
         //pal IE, pobre ie
         elm.style.filter = 'alpha(opacity=' + opacity*100 + ')';
@@ -76,23 +66,17 @@ var labelBrand  = document.getElementsByClassName("brand");
 labelBrand[0].addEventListener("click",function(){
 	document.location.href="/Comiqueria/index_App";
 });
-var $rows = $('#table tr:not(.bind)');
-$('#search').keyup(function() {
-    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-    
-    $rows.show().filter(function() {
-        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-        return !~text.indexOf(val);
-    }).hide();
-});
-/*
-
-$(document).ready(function(){
-    $("button").click(function(){
-        var div = $("div");
-        div.animate({height: '300px', opacity: '0.4'}, "slow");
-        div.animate({width: '300px', opacity: '0.8'}, "slow");
-        div.animate({height: '100px', opacity: '0.4'}, "slow");
-        div.animate({width: '100px', opacity: '0.8'}, "slow");
-    });
-});*/
+try{
+	var $rows = $('#table tr:not(.bind)');
+	$('#search').keyup(function() {
+	    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+	    
+	    $rows.show().filter(function() {
+	        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+	        return !~text.indexOf(val);
+	    }).hide();
+	});
+}
+catch (error){
+	
+}

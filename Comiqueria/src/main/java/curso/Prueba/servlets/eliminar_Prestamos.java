@@ -23,47 +23,74 @@ import com.comics.app.ViewModel.comicViewModel;
 @WebServlet("/eliminar_Prestamos")
 public class eliminar_Prestamos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       int IdLoan;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public eliminar_Prestamos() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	int IdLoan;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IdLoan =Integer.parseInt( request.getParameter("id"));
-		Loan cLoan = new loanController().get(IdLoan);
-		List<comicViewModel> cListado = new ArrayList<comicViewModel>();
-		for (comicViewModel comiques : new comicController().getAll() ){
-			if (comiques.getIdComic()==cLoan.getComic().getIdComic() || comiques.getQuantityComic() > 0){
-			cListado.add(comiques);
+	public eliminar_Prestamos() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Boolean adm = (Boolean) request.getSession().getAttribute("esAdmin");
+
+		if (adm != null && adm) {
+			IdLoan = Integer.parseInt(request.getParameter("id"));
+			Loan cLoan;
+			try {
+				cLoan = new loanController().get(IdLoan);
+
+				List<comicViewModel> cListado = new ArrayList<comicViewModel>();
+				for (comicViewModel comiques : new comicController().getAll()) {
+					if (comiques.getIdComic() == cLoan.getComic().getIdComic() || comiques.getQuantityComic() > 0) {
+						cListado.add(comiques);
+					}
+				}
+
+				request.setAttribute("cListado", cListado);
+				request.setAttribute("cloan", cLoan);
+				request.setAttribute("pListado", new personController().getAll());
+				request.getRequestDispatcher("cuerpo/loans/deleteLoans.jsp").forward(request, response);
+			} catch (Exception e) {
+				request.setAttribute("error", e);
+				request.getRequestDispatcher("/Comiqueria/muestra_Error").forward(request, response);
+
 			}
+		} else {
+			response.sendRedirect("/Comiqueria/login_App");
 		}
-		
-		request.setAttribute("cListado",cListado );
-		request.setAttribute("cloan",cLoan);
-		request.setAttribute("pListado", new personController().getAll());
-		request.getRequestDispatcher("cuerpo/loans/deleteLoans.jsp").forward(request, response);
-}
+
+	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Loan cLoan = new loanController().get(IdLoan);
-		Comic cComic = cLoan.getComic();
-		cComic.setQuantityComic(cLoan.getComic().getQuantityComic() +1);
-		new comicController().update(cComic) ;
-		new loanController().delete(cLoan.getIdLoan());
-		 
-		
-		 response.sendRedirect("/Comiqueria/obtener_Prestamos");
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Loan cLoan;
+		try {
+			cLoan = new loanController().get(IdLoan);
+
+			Comic cComic = cLoan.getComic();
+			cComic.setQuantityComic(cLoan.getComic().getQuantityComic() + 1);
+			new comicController().update(cComic);
+			new loanController().delete(cLoan.getIdLoan());
+
+			response.sendRedirect("/Comiqueria/obtener_Prestamos");
+		} catch (Exception e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("/Comiqueria/muestra_Error").forward(request, response);
+		}
+
 	}
 
 }

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.comics.app.Classes.exceptionConverter;
 import com.comics.app.Model.Person;
 
 public class personDao implements genericDao<Person> {
@@ -23,7 +24,7 @@ public class personDao implements genericDao<Person> {
 	
 	private final connectionDB conn = connectionDB.getConnection();
 	
-	public boolean add(Person c) {
+	public boolean add(Person c) throws Exception {
 		try {
 			PreparedStatement ps;
 			ps = conn.getConn().prepareStatement(SQL_INSERT);
@@ -36,13 +37,14 @@ public class personDao implements genericDao<Person> {
 			}			
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos Personas", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return false;
 	}
-	public boolean check(int key){
+	public boolean check(int key) throws Exception{
 	    PreparedStatement ps;
 	    ResultSet rs;
 		try {
@@ -61,14 +63,14 @@ public class personDao implements genericDao<Person> {
 			  }
 		  return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos Personas", e) ;
 		}
 		finally {
 			conn.closeConnection();
 		}
    }
-	public boolean update(Person c) {
+	public boolean update(Person c) throws Exception{
 	PreparedStatement ps;
 		
 		try {
@@ -80,14 +82,15 @@ public class personDao implements genericDao<Person> {
 				return true;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos Personas", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return false;
 	}
 
-	public boolean delete(int key) {
+	public boolean delete(int key) throws Exception {
 		PreparedStatement ps;
 		
 		try {
@@ -99,14 +102,15 @@ public class personDao implements genericDao<Person> {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos Personas", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return false;
 	}
 
-	public Person get(int key) {
+	public Person get(int key) throws Exception {
 		Person p = new Person();
 		
 		try {
@@ -125,14 +129,15 @@ public class personDao implements genericDao<Person> {
 			}
 					
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos Personas", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return p;
 	}
 
-	public List<Person> getAll() {
+	public List<Person> getAll() throws Exception{
 		List<Person> list = new ArrayList<Person>();
 		
 		try {
@@ -153,7 +158,8 @@ public class personDao implements genericDao<Person> {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos Personas", e) ;
 		} finally {
 			conn.closeConnection();
 		}

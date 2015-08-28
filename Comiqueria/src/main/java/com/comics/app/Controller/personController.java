@@ -11,24 +11,18 @@ public class personController {
 	
 	personDao persondao = new personDao();
 	
-	public boolean login(String username, String password) {
-		if (username.equals("Sheldon") && password.equals("Bazzinga")) {
-			return true;
-		}
-		return false;
-	}
 	
-	public boolean add(Person c) {
+	public boolean add(Person c)  throws Exception {
 		boolean rta = persondao.add(c);
 		return rta;
 	}
 	
-	public Person get(int key) {
+	public Person get(int key) throws Exception {
 		Person p = persondao.get(key);		
 		return p;
 	}
 	
-	public List<personViewModel> getAll() {
+	public List<personViewModel> getAll() throws Exception {
 		List<personViewModel> list =new ArrayList<personViewModel>();
 		for(Person person : persondao.getAll()){
 			list.add(new personViewModel(
@@ -41,12 +35,12 @@ public class personController {
 		return list;
 	}
 	
-	public boolean delete(int key) {
+	public boolean delete(int key) throws Exception {
 		boolean rta = persondao.delete(key);		
 		return rta;
 	}
 	
-	public boolean update(Person p) {
+	public boolean update(Person p) throws Exception  {
 		boolean rta = persondao.update(p);
 		return rta;
 	}

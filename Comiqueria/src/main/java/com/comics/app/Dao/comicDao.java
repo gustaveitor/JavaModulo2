@@ -3,6 +3,8 @@ package com.comics.app.Dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
+
+import com.comics.app.Classes.exceptionConverter;
 import com.comics.app.Model.Comic;
 
 public class comicDao implements genericDao<Comic> {
@@ -19,7 +21,7 @@ public class comicDao implements genericDao<Comic> {
 
 	private final connectionDB conn = connectionDB.getConnection();
 	
-	public boolean add(Comic c) {
+	public boolean add(Comic c) throws Exception {
 		try {
 			PreparedStatement ps;
 			ps = conn.getConn().prepareStatement(SQL_INSERT);
@@ -34,13 +36,15 @@ public class comicDao implements genericDao<Comic> {
 			}			
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos COMICS", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return false;
 	}
-   public boolean check(int key){
+   public boolean check(int key) throws Exception{
 	    PreparedStatement ps;
 	    ResultSet rs;
 		try {
@@ -58,14 +62,15 @@ public class comicDao implements genericDao<Comic> {
 		  }
 		  return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
+
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos COMICS", e) ;
 		}
 		finally {
 			conn.closeConnection();
 		}
    }
-	public boolean update(Comic c) {
+	public boolean update(Comic c) throws Exception {
 		PreparedStatement ps;
 		
 		try {
@@ -80,14 +85,16 @@ public class comicDao implements genericDao<Comic> {
 				return true;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos COMICS", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return false;
 	}
 
-	public boolean delete(int key) {
+	public boolean delete(int key) throws Exception {
 		PreparedStatement ps;
 		
 		try {
@@ -99,14 +106,16 @@ public class comicDao implements genericDao<Comic> {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos COMICS", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return false;
 	}
 
-	public Comic get(int key) {		
+	public Comic get(int key) throws Exception {		
 		Comic c = new Comic();
 		
 		try {
@@ -127,14 +136,16 @@ public class comicDao implements genericDao<Comic> {
 			}
 					
 		} catch (SQLException e) {
-			e.printStackTrace();
+
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos COMICS", e) ;
 		} finally {
 			conn.closeConnection();
 		}
 		return c;
 	}
 
-	public List<Comic> getAll() {
+	public List<Comic> getAll() throws Exception {
 		List<Comic> list = new ArrayList<Comic>();
 		
 		try {
@@ -157,7 +168,9 @@ public class comicDao implements genericDao<Comic> {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+
+			new exceptionConverter();
+			throw exceptionConverter.getException("Problemas en la base de datos COMICS", e) ;
 		} finally {
 			conn.closeConnection();
 		}

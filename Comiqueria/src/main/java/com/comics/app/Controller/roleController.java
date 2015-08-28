@@ -8,34 +8,27 @@ import com.comics.app.Model.Role;
 public class roleController {
 	roleDao roledao = new roleDao();
 	
-	public boolean login(String username, String password) {
-		if (username.equals("Sheldon") && password.equals("Bazzinga")) {
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean add(Role c) {
+	public boolean add(Role c) throws Exception {
 		boolean rta = roledao.add(c);
 		return rta;
 	}
 	
-	public Role get(int key) {
+	public Role get(int key) throws Exception {
 		Role p = roledao.get(key);		
 		return p;
 	}
 	
-	public List<Role> getAll() {
+	public List<Role> getAll() throws Exception {
 		List<Role> list = roledao.getAll();
 		return list;
 	}
 	
-	public boolean delete(int key) {
+	public boolean delete(int key) throws Exception {
 		boolean rta = roledao.delete(key);		
 		return rta;
 	}
 	
-	public boolean update(Role p) {
+	public boolean update(Role p) throws Exception {
 		boolean rta = roledao.update(p);
 		return rta;
 	}

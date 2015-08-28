@@ -1,17 +1,14 @@
 package com.comics.app.Comics;
 
-import java.util.Scanner;
 
-import com.comics.app.Controller.*;
-import com.comics.app.Model.*;
 //import Views.menues;
 
 public class App 
 {
-    @SuppressWarnings("resource")
-	public static void main( String[] args )
+    public static void main( String[] args )
     {
-    	//Controllers instances
+    /*	
+     * //Controllers instances
     	comicController comicControl = new comicController();
     	personController personControl = new personController();
     	loanController loanControl = new loanController();
@@ -40,7 +37,7 @@ public class App
         	username = input.next();
         	System.out.println("Password");
         	password = input.next();
-        	if(personControl.login(username, password)) {
+        	//if(personControl.login(username, password)) {
         		
         		System.out.println("Welcome! \n \n");
         		
@@ -226,9 +223,9 @@ public class App
         	    	    	break;
         	    	}
             	}
-        	} else {
-        		System.out.println("Bad login");
-        	}
+      //  	} else {
+       //		System.out.println("Bad login");
+        //	}
     	} else if(act.equals("n")) {
     		System.out.println("Welcome friend! \n \n");
     		System.out.println("1. List all the comics. \n \n");
@@ -243,5 +240,5 @@ public class App
     			break;
     		}
     	}
-    }
-}
+    }*/
+}}
