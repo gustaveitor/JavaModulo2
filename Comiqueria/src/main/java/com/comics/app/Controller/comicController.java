@@ -1,8 +1,6 @@
 package com.comics.app.Controller;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import com.comics.app.Dao.comicDao;
 import com.comics.app.Model.Comic;
 import com.comics.app.ViewModel.comicViewModel;
@@ -20,7 +18,6 @@ public class comicController {
 		} catch (Exception e) {
 			throw e;
 		}
-
 	}
 
 	public Comic get(int key) throws Exception {
@@ -41,7 +38,6 @@ public class comicController {
 					comic.getReviewComic(), comic.getQuantityComic(), comicdao.check(comic.getIdComic())));
 		}
 		return list;
-
 	}
 
 	public boolean delete(int key) throws Exception {
@@ -62,6 +58,5 @@ public class comicController {
 		} catch (Exception e) {
 			throw e;
 		}
-
 	}
 }
